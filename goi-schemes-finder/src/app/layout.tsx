@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="geo-pattern min-h-screen">
         {children}
-        <div className="version-badge">v0.0.2</div>
+        <div className="version-badge">v0.0.3</div>
       </body>
     </html>
   );
