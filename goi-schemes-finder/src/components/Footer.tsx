@@ -1,28 +1,52 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
     <footer className="border-t border-white/10 mt-20">
+      {/* Disclaimer Banner */}
+      <div className="bg-navy-light/50 py-3 px-4 border-b border-white/5">
+        <div className="max-w-7xl mx-auto text-center">
+          <p className="text-xs text-gray-500">
+            <strong className="text-gray-400">अस्वीकरण (Disclaimer):</strong> This is an unofficial informational portal. 
+            Always verify scheme details on official government websites before applying.
+          </p>
+        </div>
+      </div>
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-saffron to-saffron-dark rounded-lg flex items-center justify-center">
-                <span className="text-navy font-bold text-lg">🇮🇳</span>
+              <div className="w-12 h-12 bg-gradient-to-br from-white/10 to-white/5 rounded-lg flex items-center justify-center p-2 border border-saffron/20">
+                <Image
+                  src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
+                  alt="भारत सरकार"
+                  width={32}
+                  height={38}
+                  className="opacity-80"
+                />
               </div>
               <div>
                 <h2 className="text-lg font-bold text-white">GOI Schemes Finder</h2>
-                <p className="text-xs text-gray-400">Discover. Apply. Grow.</p>
+                <p className="text-xs text-saffron">सरकारी योजनाएं खोजें • Discover. Apply. Grow.</p>
               </div>
             </div>
-            <p className="text-gray-400 text-sm max-w-md">
+            <p className="text-gray-400 text-sm max-w-md mb-4">
               Your comprehensive guide to Government of India schemes for startups, 
               technology, solar energy, and MSME sectors. Find schemes you&apos;re 
               eligible for and get direct application links.
             </p>
+            <div className="flex items-center gap-2 text-xs text-gray-500">
+              <span>Made with</span>
+              <span className="text-red-500">❤️</span>
+              <span>in India</span>
+              <span className="mx-2">|</span>
+              <span>जय हिंद 🇮🇳</span>
+            </div>
           </div>
 
           {/* Quick Links */}

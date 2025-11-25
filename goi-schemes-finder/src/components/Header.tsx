@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
@@ -20,12 +21,18 @@ export default function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-saffron to-saffron-dark rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform">
-              <span className="text-navy font-bold text-lg">🇮🇳</span>
+            <div className="w-10 h-10 bg-gradient-to-br from-white/10 to-white/5 rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform p-1.5 border border-saffron/30">
+              <Image
+                src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
+                alt="भारत सरकार"
+                width={28}
+                height={32}
+                className="opacity-90"
+              />
             </div>
             <div className="hidden sm:block">
-              <h1 className="text-lg font-bold text-white">GOI Schemes</h1>
-              <p className="text-xs text-gray-400 -mt-1">Finder</p>
+              <h1 className="text-base font-bold text-white tracking-wide">GOI Schemes Finder</h1>
+              <p className="text-[10px] text-saffron -mt-0.5 font-medium">सरकारी योजनाएं खोजें</p>
             </div>
           </Link>
 
