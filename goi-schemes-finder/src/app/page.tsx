@@ -133,14 +133,13 @@ export default function Home() {
                 <div className="absolute -inset-4 bg-gradient-to-br from-saffron/30 via-transparent to-green-india/30 rounded-full blur-xl"></div>
                 
                 {/* Main image container */}
-                <div className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-saffron/40 shadow-2xl shadow-saffron/20">
-                  <Image
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/PM_Modi_2015.jpg/800px-PM_Modi_2015.jpg"
-                    alt="Hon'ble Prime Minister Shri Narendra Modi"
-                    fill
-                    className="object-cover object-top"
-                    priority
-                  />
+                <div className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-saffron/40 shadow-2xl shadow-saffron/20 bg-gradient-to-br from-saffron/30 via-white/10 to-green-india/30 flex items-center justify-center">
+                  {/* Placeholder - add /modi.jpg to public folder for actual image */}
+                  <div className="text-center">
+                    <div className="text-8xl mb-4">🇮🇳</div>
+                    <p className="text-white font-bold text-lg">भारत माता की जय</p>
+                    <p className="text-saffron text-sm">Jai Hind</p>
+                  </div>
                 </div>
                 
                 {/* Name badge */}
