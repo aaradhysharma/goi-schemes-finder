@@ -130,7 +130,7 @@ export default function Footer() {
             © 2025 GOI Schemes Finder. For informational purposes only.
           </p>
           <p className="text-gray-500 text-xs">
-            Data sourced from official government portals. Always verify on official websites before applying.
+            Data sourced from official government portals. Always verify on official websites before applying. v0.0.1
           </p>
         </div>
       </div>
