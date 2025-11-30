@@ -716,7 +716,7 @@ export const schemes: Scheme[] = [
     ],
     maxBenefit: 'Up to ₹1 Crore grant/seed capital',
     eligibility: {
-      categories: ['agriculture', 'manufacturing', 'innovation'],
+      categories: ['agriculture', 'manufacturing', 'technology'],
       stages: ['idea', 'startup'],
       states: 'all',
       interestTypes: ['funding', 'infrastructure', 'training'],
