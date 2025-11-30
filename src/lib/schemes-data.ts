@@ -701,6 +701,87 @@ export const schemes: Scheme[] = [
     featured: false,
     category: 'msme'
   },
+  {
+    id: 'aspire-scheme',
+    name: 'ASPIRE (A Scheme for Promotion of Innovation, Rural Industries and Entrepreneurship)',
+    shortName: 'ASPIRE',
+    ministry: 'Ministry of MSME',
+    description: 'Promotes innovation and rural entrepreneurship through Livelihood Business Incubators (LBI) and Technology Business Incubators (TBI).',
+    benefits: [
+      'Grant up to ₹1 crore for LBI/TBI',
+      'Seed capital up to ₹1 crore for startups',
+      'Focus on agro-rural industry',
+      'Skill development and incubation',
+      'Employment generation in rural areas'
+    ],
+    maxBenefit: 'Up to ₹1 Crore grant/seed capital',
+    eligibility: {
+      categories: ['agriculture', 'manufacturing', 'innovation'],
+      stages: ['idea', 'startup'],
+      states: 'all',
+      interestTypes: ['funding', 'infrastructure', 'training'],
+      additionalCriteria: [
+        'Focus on agro-rural sector',
+        'Innovation and entrepreneurship promotion',
+        'Apply through approved LBI/TBI'
+      ]
+    },
+    applicationProcess: [
+      'Apply through Ministry of MSME portal',
+      'Submit proposal for LBI/TBI or startup',
+      'Evaluation by Screening Committee',
+      'Approval and fund release'
+    ],
+    documents: [
+      'Proposal document',
+      'Registration details',
+      'Project report'
+    ],
+    officialUrl: 'https://aspire.msme.gov.in/',
+    featured: false,
+    category: 'innovation'
+  },
+  {
+    id: 'sfurti-scheme',
+    name: 'Scheme of Fund for Regeneration of Traditional Industries (SFURTI)',
+    shortName: 'SFURTI',
+    ministry: 'Ministry of MSME',
+    description: 'Organizes traditional industries and artisans into clusters to make them competitive and provide support for their long-term sustainability.',
+    benefits: [
+      'Grant up to ₹5 crores for Heritage Clusters (1000-2500 artisans)',
+      'Grant up to ₹2.5 crores for Major Clusters (500-1000 artisans)',
+      'Grant up to ₹1 crore for Mini Clusters (up to 500 artisans)',
+      'Infrastructure and skill development support',
+      'Market promotion assistance'
+    ],
+    maxBenefit: 'Up to ₹5 Crores grant for clusters',
+    eligibility: {
+      categories: ['manufacturing', 'agriculture', 'services'], // Traditional industries often fall here
+      stages: ['growth', 'established'],
+      states: 'all',
+      interestTypes: ['funding', 'infrastructure', 'training', 'market_access'],
+      additionalCriteria: [
+        'Traditional industry artisans/clusters',
+        'Khadi, Coir, Village Industries',
+        'Project proposed by Implementing Agency'
+      ]
+    },
+    applicationProcess: [
+      'Identify potential cluster',
+      'Prepare Diagnostic Study Report (DSR)',
+      'Submit proposal to Nodal Agency (KVIC/Coir Board)',
+      'Approval by Scheme Steering Committee',
+      'Implementation via Implementing Agency'
+    ],
+    documents: [
+      'Diagnostic Study Report',
+      'Detailed Project Report (DPR)',
+      'Cluster details'
+    ],
+    officialUrl: 'https://sfurti.msme.gov.in/',
+    featured: false,
+    category: 'msme'
+  },
   // INNOVATION
   {
     id: 'aim-atal-incubation',
@@ -1147,4 +1228,3 @@ export const searchSchemes = (query: string): Scheme[] => {
     scheme.ministry.toLowerCase().includes(lowerQuery)
   );
 };
-
