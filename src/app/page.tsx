@@ -46,7 +46,7 @@ export default function Home() {
               {/* Official Badge */}
               <div className="inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-navy-light border border-saffron/30 mb-6 animate-fade-in">
                 <Image
-                  src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
+                  src="/emblem-india.svg"
                   alt="Emblem of India"
                   width={24}
                   height={28}
@@ -359,7 +359,7 @@ export default function Home() {
             <div className="relative p-8 sm:p-12 text-center">
               <div className="inline-flex items-center gap-2 mb-6 text-gray-400 text-sm">
                 <Image
-                  src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
+                  src="/emblem-india.svg"
                   alt="Emblem"
                   width={20}
                   height={24}

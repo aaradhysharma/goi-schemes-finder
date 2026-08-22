@@ -23,8 +23,8 @@ export default function Header() {
           <Link href="/" className="flex items-center gap-3 group">
             <div className="w-10 h-10 bg-gradient-to-br from-white/10 to-white/5 rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform p-1.5 border border-saffron/30">
               <Image
-                src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
-                alt="भारत सरकार"
+                src="/emblem-india.svg"
+                alt="Emblem of India"
                 width={28}
                 height={32}
                 className="opacity-90"
@@ -67,6 +67,9 @@ export default function Header() {
           <button
             className="md:hidden p-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation"
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
           >
             <svg
               className="w-6 h-6"

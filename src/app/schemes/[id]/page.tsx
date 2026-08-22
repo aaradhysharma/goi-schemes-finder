@@ -1,10 +1,9 @@
-'use client';
-
-import { useParams } from 'next/navigation';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { getSchemeById, Scheme } from '@/lib/schemes-data';
+import BookmarkButton from '@/components/BookmarkButton';
+import { getSchemeById, schemes, Scheme } from '@/lib/schemes-data';
 
 const categoryColors: Record<Scheme['category'], string> = {
   startup: 'from-blue-500 to-blue-600',
@@ -26,13 +25,47 @@ const categoryIcons: Record<Scheme['category'], string> = {
   women: '👩‍💼',
 };
 
-export default function SchemeDetailPage() {
-  const params = useParams();
-  const scheme = getSchemeById(params.id as string);
+export function generateStaticParams() {
+  return schemes.map((scheme) => ({ id: scheme.id }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const scheme = getSchemeById(id);
+
+  if (!scheme) {
+    return { title: 'Scheme Not Found' };
+  }
+
+  const title = `${scheme.name} — ${scheme.maxBenefit}`;
+  const description = `${scheme.description} Apply via the official ${scheme.ministry} portal. Check your eligibility on GOI Schemes Finder.`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: 'article',
+    },
+  };
+}
+
+export default async function SchemeDetailPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const scheme = getSchemeById(id);
 
   if (!scheme) {
     return (
-      <main className="min-h-screen">
+      <main className="min-h-screen" id="main-content">
         <Header />
         <div className="pt-24 pb-16 px-4 flex items-center justify-center">
           <div className="text-center">
@@ -52,13 +85,13 @@ export default function SchemeDetailPage() {
   }
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen" id="main-content">
       <Header />
-      
+
       <div className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-sm text-gray-400 mb-6">
+          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-gray-400 mb-6">
             <Link href="/" className="hover:text-saffron transition-colors">Home</Link>
             <span>/</span>
             <Link href="/schemes" className="hover:text-saffron transition-colors">Schemes</Link>
@@ -71,11 +104,14 @@ export default function SchemeDetailPage() {
             <div className={`h-2 bg-gradient-to-r ${categoryColors[scheme.category]}`} />
             <div className="p-6 sm:p-8">
               <div className="flex items-start gap-4 mb-6">
-                <div className="w-16 h-16 bg-navy-lighter rounded-xl flex items-center justify-center text-3xl">
+                <div
+                  className="w-16 h-16 bg-navy-lighter rounded-xl flex items-center justify-center text-3xl"
+                  aria-hidden="true"
+                >
                   {categoryIcons[scheme.category]}
                 </div>
                 <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
+                  <div className="flex items-center gap-3 mb-2 flex-wrap">
                     <h1 className="text-2xl sm:text-3xl font-bold text-white">
                       {scheme.name}
                     </h1>
@@ -84,6 +120,7 @@ export default function SchemeDetailPage() {
                         Featured
                       </span>
                     )}
+                    <BookmarkButton schemeId={scheme.id} />
                   </div>
                   <p className="text-gray-400">{scheme.ministry}</p>
                 </div>
@@ -122,12 +159,15 @@ export default function SchemeDetailPage() {
             {/* Benefits */}
             <div className="glass rounded-xl p-6">
               <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-                <span className="text-2xl">🎁</span> Benefits
+                <span className="text-2xl" aria-hidden="true">🎁</span> Benefits
               </h2>
               <ul className="space-y-3">
                 {scheme.benefits.map((benefit, index) => (
                   <li key={index} className="flex items-start gap-3">
-                    <span className="w-6 h-6 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center text-sm flex-shrink-0 mt-0.5">
+                    <span
+                      className="w-6 h-6 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center text-sm flex-shrink-0 mt-0.5"
+                      aria-hidden="true"
+                    >
                       ✓
                     </span>
                     <span className="text-gray-300">{benefit}</span>
@@ -139,12 +179,15 @@ export default function SchemeDetailPage() {
             {/* Eligibility */}
             <div className="glass rounded-xl p-6">
               <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-                <span className="text-2xl">✅</span> Eligibility Criteria
+                <span className="text-2xl" aria-hidden="true">✅</span> Eligibility Criteria
               </h2>
               <ul className="space-y-3">
                 {scheme.eligibility.additionalCriteria.map((criteria, index) => (
                   <li key={index} className="flex items-start gap-3">
-                    <span className="w-6 h-6 bg-saffron/20 text-saffron rounded-full flex items-center justify-center text-sm flex-shrink-0 mt-0.5">
+                    <span
+                      className="w-6 h-6 bg-saffron/20 text-saffron rounded-full flex items-center justify-center text-sm flex-shrink-0 mt-0.5"
+                      aria-hidden="true"
+                    >
                       {index + 1}
                     </span>
                     <span className="text-gray-300">{criteria}</span>
@@ -186,8 +229,8 @@ export default function SchemeDetailPage() {
               <div className="mt-4">
                 <p className="text-sm text-gray-400 mb-2">Available In</p>
                 <span className="px-3 py-1 bg-green-500/20 rounded-full text-xs text-green-400">
-                  {scheme.eligibility.states === 'all'
-                    ? '🇮🇳 All States & UTs'
+                  🇮🇳 {scheme.eligibility.states === 'all'
+                    ? 'All States & UTs'
                     : scheme.eligibility.states.join(', ')}
                 </span>
               </div>
@@ -196,7 +239,7 @@ export default function SchemeDetailPage() {
             {/* Application Process */}
             <div className="glass rounded-xl p-6">
               <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-                <span className="text-2xl">📋</span> How to Apply
+                <span className="text-2xl" aria-hidden="true">📋</span> How to Apply
               </h2>
               <ol className="space-y-4">
                 {scheme.applicationProcess.map((step, index) => (
@@ -213,15 +256,18 @@ export default function SchemeDetailPage() {
             {/* Documents Required */}
             <div className="glass rounded-xl p-6">
               <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-                <span className="text-2xl">📄</span> Documents Required
+                <span className="text-2xl" aria-hidden="true">📄</span> Documents Required
               </h2>
               <ul className="space-y-3">
                 {scheme.documents.map((doc, index) => (
                   <li key={index} className="flex items-start gap-3">
-                    <span className="w-6 h-6 bg-blue-500/20 text-blue-400 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                    <span
+                      className="w-6 h-6 bg-blue-500/20 text-blue-400 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                      aria-hidden="true"
+                    >
+                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                         <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
-                        <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd" />
+                        <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd" />
                       </svg>
                     </span>
                     <span className="text-gray-300">{doc}</span>
@@ -246,7 +292,7 @@ export default function SchemeDetailPage() {
               className="inline-flex items-center gap-2 btn-primary text-lg px-8 py-4"
             >
               Go to Official Portal
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
             </a>
@@ -271,4 +317,3 @@ export default function SchemeDetailPage() {
     </main>
   );
 }
-

@@ -23,8 +23,8 @@ export default function Footer() {
             <div className="flex items-center gap-3 mb-4">
               <div className="w-12 h-12 bg-gradient-to-br from-white/10 to-white/5 rounded-lg flex items-center justify-center p-2 border border-saffron/20">
                 <Image
-                  src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
-                  alt="भारत सरकार"
+                  src="/emblem-india.svg"
+                  alt="Emblem of India"
                   width={32}
                   height={38}
                   className="opacity-80"
@@ -130,7 +130,7 @@ export default function Footer() {
             © 2025 GOI Schemes Finder. For informational purposes only.
           </p>
           <p className="text-gray-500 text-xs">
-            Data sourced from official government portals. Always verify on official websites before applying. v0.0.1
+            Data sourced from official government portals. Always verify on official websites before applying.
           </p>
         </div>
       </div>

@@ -36,10 +36,8 @@ function SchemesContent() {
 
     // Filter by search query
     if (searchQuery.trim()) {
-      result = searchSchemes(searchQuery);
-      if (selectedCategory !== 'all') {
-        result = result.filter(scheme => scheme.category === selectedCategory);
-      }
+      const matches = new Set(searchSchemes(searchQuery).map(s => s.id));
+      result = result.filter(scheme => matches.has(scheme.id));
     }
 
     return result;
@@ -81,8 +79,9 @@ function SchemesContent() {
                 />
               </svg>
               <input
-                type="text"
+                type="search"
                 placeholder="Search schemes by name, ministry, or keywords..."
+                aria-label="Search schemes by name, ministry, or keywords"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="input-field pl-12"

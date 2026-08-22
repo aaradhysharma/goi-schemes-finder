@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Scheme } from '@/lib/schemes-data';
 import { EligibilityResult } from '@/lib/eligibility-engine';
 import EligibilityMeter from './EligibilityMeter';
+import BookmarkButton from './BookmarkButton';
 
 interface SchemeCardProps {
   scheme: Scheme;
@@ -50,19 +51,24 @@ export default function SchemeCard({
         {/* Header */}
         <div className="flex items-start justify-between gap-4 mb-4">
           <div className="flex items-center gap-3">
-            <span className="text-2xl">{categoryIcons[scheme.category]}</span>
+            <span className="text-2xl" aria-hidden="true">{categoryIcons[scheme.category]}</span>
             <div>
               <h3 className="font-semibold text-white text-lg leading-tight">
-                {scheme.shortName}
+                <Link href={`/schemes/${scheme.id}`} className="hover:text-saffron transition-colors">
+                  {scheme.shortName}
+                </Link>
               </h3>
               <p className="text-xs text-gray-400 mt-0.5">{scheme.ministry}</p>
             </div>
           </div>
-          {scheme.featured && (
-            <span className="px-2 py-1 bg-saffron/20 text-saffron text-xs font-medium rounded-full whitespace-nowrap">
-              Featured
-            </span>
-          )}
+          <div className="flex items-center gap-1">
+            {scheme.featured && (
+              <span className="px-2 py-1 bg-saffron/20 text-saffron text-xs font-medium rounded-full whitespace-nowrap">
+                Featured
+              </span>
+            )}
+            <BookmarkButton schemeId={scheme.id} />
+          </div>
         </div>
 
         {/* Description */}
